@@ -97,3 +97,27 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+```aiignore
+src/
+├── app/                  # Application Layer (Use Cases)
+│   ├── use-cases/
+│   │   ├── auth/
+│   │   └── customer/
+│   └── ports/            # Interfaces (Ports)
+│       ├── input/        # DTOs
+│       └── output/       # Repository Interfaces
+├── domain/               # Domain Layer (Business Logic)
+│   ├── models/           # Entitas, Value Objects
+│   ├── repositories/     # Abstraksi Repository (interface)
+│   └── services/         # Domain Services
+├── infrastructure/       # Infrastructure Layer (Adapters)
+│   ├── adapters/
+│   │   ├── persistence/  # Implementasi Database (TypeORM/Prisma)
+│   │   │   └── postgres/
+│   │   ├── websocket/    # Gateways (Socket.IO)
+│   │   └── http/         # Controllers & Modules
+│   ├── config/           # Konfigurasi Database, Redis, dll.
+│   └── main.ts
+└── shared/               # Kode yang bisa dipakai di semua layer
+```
