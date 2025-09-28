@@ -6,7 +6,6 @@ import { CustomerService } from '../../../domain/services/customer.service';
 
 /* Application Logic	*/
 @Injectable()
-@Injectable()
 export class CreateCustomerUseCase {
   constructor(
     @Inject('ICustomerRepository')

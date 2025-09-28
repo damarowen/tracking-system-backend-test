@@ -8,7 +8,14 @@ import {
   Delete,
   NotFoundException,
   ParseUUIDPipe,
+  UseGuards,
 } from '@nestjs/common';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiBearerAuth,
+} from '@nestjs/swagger';
 import {
   CreateCustomerUseCase,
   GetAllCustomersUseCase,
@@ -20,7 +27,9 @@ import {
   CustomerDto,
   UpdateCustomerDto,
 } from '../../../../app/ports/input/customer.dto';
+import { JwtAuthGuard } from '../../../common/jwt/jwt-auth.guard';
 
+@ApiTags('Customers')
 @Controller('customers')
 export class CustomerController {
   constructor(
@@ -32,6 +41,11 @@ export class CustomerController {
   ) {}
 
   @Post()
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Create a new customer' })
+  @ApiResponse({ status: 201, description: 'Customer created successfully' })
+  @ApiResponse({ status: 409, description: 'Customer already exists' })
   create(@Body() createCustomerDto: CustomerDto) {
     return this.createCustomerUseCase.execute(
       createCustomerDto.name,
@@ -40,11 +54,20 @@ export class CustomerController {
   }
 
   @Get()
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Get all customers' })
+  @ApiResponse({ status: 200, description: 'List of customers' })
   findAll() {
     return this.getAllCustomersUseCase.execute();
   }
 
   @Get(':id')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Get customer by ID' })
+  @ApiResponse({ status: 200, description: 'Customer found' })
+  @ApiResponse({ status: 404, description: 'Customer not found' })
   async findOne(@Param('id', ParseUUIDPipe) id: string) {
     const customer = await this.getCustomerByIdUseCase.execute(id);
     if (!customer) {
@@ -54,6 +77,12 @@ export class CustomerController {
   }
 
   @Patch(':id')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Update customer' })
+  @ApiResponse({ status: 200, description: 'Customer updated successfully' })
+  @ApiResponse({ status: 404, description: 'Customer not found' })
+  @ApiResponse({ status: 409, description: 'Email already exists' })
   update(
     @Param('id', ParseUUIDPipe) id: string,
     @Body() updateCustomerDto: UpdateCustomerDto,
@@ -62,6 +91,11 @@ export class CustomerController {
   }
 
   @Delete(':id')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Delete customer' })
+  @ApiResponse({ status: 200, description: 'Customer deleted successfully' })
+  @ApiResponse({ status: 404, description: 'Customer not found' })
   async remove(@Param('id', ParseUUIDPipe) id: string) {
     await this.deleteCustomerUseCase.execute(id);
     return { message: 'Customer deleted successfully' };
