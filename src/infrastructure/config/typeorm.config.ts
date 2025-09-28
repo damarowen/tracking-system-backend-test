@@ -14,7 +14,7 @@ export const typeOrmAsyncConfig: TypeOrmModuleAsyncOptions = {
     type: 'postgres',
     host: configService.get<string>('DB_HOST', 'localhost'),
     port: configService.get<number>('DB_PORT', 5432),
-    database: configService.get<string>('DB_NAME', 'postgres'),
+    database: configService.get<string>('DB_NAME', 'live-tracking'),
     entities: [__dirname + '/../../domain/models/*.entity{.ts,.js}'],
     synchronize: true,
     autoLoadEntities: true,
