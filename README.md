@@ -57,8 +57,8 @@ cd real-time-tracking-system
 # Start development environment
 npm run docker:dev
 
-# Or start production environment
-npm run docker:prod
+# Or start docker compose
+docker-compose up --build and run node scripts/simple-simulator.js to simulate 10 users
 ```
 
 ### Option 2: Local Development
@@ -199,9 +199,6 @@ npm run test:e2e
 
 # Test coverage
 npm run test:cov
-
-# Test WebSocket connection
-node scripts/test-websocket.js
 ```
 
 ## 📈 Performance Considerations

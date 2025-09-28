@@ -14,7 +14,7 @@ import {
 } from '../../../../app/use-cases/auth/auth.use-case';
 import { ICustomerRepository } from '../../../../domain/repositories/customer.repository';
 import { CustomerRepository } from '../../persistence/postgres/customer.repository';
-import { Customer } from 'src/domain/models/customer.entity';
+import { Customer } from '../../../../domain/models/customer.entity';
 
 @Module({
   imports: [

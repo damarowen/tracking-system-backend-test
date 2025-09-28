@@ -1,45 +1,28 @@
-FROM node:18-alpine AS base
+FROM node:22-alpine AS base
 
-# Install dependencies only when needed
-FROM base AS deps
-RUN apk add --no-cache libc6-compat
+# Ensure we're using the correct Node version
+RUN node --version && npm --version
+
+# Set working directory
 WORKDIR /app
 
 # Copy package files
 COPY package*.json ./
+
+# Install dependencies
 RUN npm ci --only=production && npm cache clean --force
 
-# Development image
-FROM base AS dev
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci
+# Copy source code
 COPY . .
-EXPOSE 3000
-CMD ["npm", "run", "start:dev"]
 
-# Build the app
-FROM base AS builder
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci
-COPY . .
+# Build the application
 RUN npm run build
 
-# Production image
-FROM base AS production
-WORKDIR /app
-
-# Create non-root user
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nestjs
-
-# Copy built application
-COPY --from=builder --chown=nestjs:nodejs /app/dist ./dist
-COPY --from=builder --chown=nestjs:nodejs /app/node_modules ./node_modules
-COPY --from=builder --chown=nestjs:nodejs /app/package*.json ./
-
-USER nestjs
+# Expose port
 EXPOSE 3000
-ENV NODE_ENV=production
-CMD ["node", "dist/infrastructure/main"]
+
+# Add explicit crypto polyfill if needed
+ENV NODE_OPTIONS="--experimental-global-webcrypto"
+
+# Start the application
+CMD ["node", "dist/infrastructure/main.js"]
