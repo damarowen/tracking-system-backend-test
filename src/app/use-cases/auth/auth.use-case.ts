@@ -8,7 +8,7 @@ import { JwtService } from '@nestjs/jwt';
 import { User } from '../../../domain/models/user.entity';
 import { IUserRepository } from '../../../domain/repositories/user.repository';
 import { RegisterUserDto } from '../../ports/input/auth.dto';
-import { Customer } from 'src/domain/models/customer.entity';
+import { Customer } from '../../../domain/models/customer.entity';
 import { ICustomerRepository } from '../../../domain/repositories/customer.repository';
 
 @Injectable()

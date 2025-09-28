@@ -6,6 +6,7 @@ import { typeOrmAsyncConfig } from '../../config/typeorm.config';
 import { AuthModule } from './auth/auth.module';
 import { CustomerModule } from './customer/customer.module';
 import { VehicleModule } from './vehicle/vehicle.module';
+import { TrackingModule } from '../websocket/tracking.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { VehicleModule } from './vehicle/vehicle.module';
     CustomerModule,
     AuthModule,
     VehicleModule,
+    TrackingModule,
   ],
 })
 export class AppModule {}

@@ -1,0 +1,14 @@
+# Database
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=live-tracking
+DB_SYNC=false
+DB_LOGGING=false
+
+# Application
+PORT=3000
+NODE_ENV=development
+
+JWT_SECRET=INI_ADALAH_RAHASIA_SUPER_AMAN_HARUS_DIGANTI
+JWT_EXPIRATION_TIME=3600s
+REDIS_URL=redis://localhost:6379
