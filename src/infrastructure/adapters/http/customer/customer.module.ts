@@ -4,11 +4,11 @@ import { CustomerController } from './customer.controller';
 import { CustomerRepository } from '../../persistence/postgres/customer.repository';
 import { Customer } from '../../../../domain/models/customer.entity';
 import {
-  CreateCustomerUseCase,
   GetAllCustomersUseCase,
   GetCustomerByIdUseCase,
   UpdateCustomerUseCase,
   DeleteCustomerUseCase,
+  CreateCustomerUseCase,
 } from '../../../../app/use-cases/customer/customer.use-case';
 import { CustomerService } from '../../../../domain/services/customer.service';
 import { CacheModule } from '@nestjs/cache-manager';

@@ -42,19 +42,6 @@ export class CustomerController {
     private readonly cacheService: CacheService,
   ) {}
 
-  @Post()
-  @UseGuards(JwtAuthGuard)
-  @ApiBearerAuth()
-  @ApiOperation({ summary: 'Create a new customer' })
-  @ApiResponse({ status: 201, description: 'Customer created successfully' })
-  @ApiResponse({ status: 409, description: 'Customer already exists' })
-  create(@Body() createCustomerDto: CustomerDto) {
-    return this.createCustomerUseCase.execute(
-      createCustomerDto.name,
-      createCustomerDto.email,
-    );
-  }
-
   @Get()
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()

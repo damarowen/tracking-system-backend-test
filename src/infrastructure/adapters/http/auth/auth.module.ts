@@ -12,10 +12,13 @@ import {
   LoginUseCase,
   RegisterUseCase,
 } from '../../../../app/use-cases/auth/auth.use-case';
+import { ICustomerRepository } from '../../../../domain/repositories/customer.repository';
+import { CustomerRepository } from '../../persistence/postgres/customer.repository';
+import { Customer } from 'src/domain/models/customer.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([User]),
+    TypeOrmModule.forFeature([User, Customer]),
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.registerAsync({
       inject: [ConfigService],
@@ -33,6 +36,10 @@ import {
     {
       provide: IUserRepository,
       useClass: UserRepository,
+    },
+    {
+      provide: ICustomerRepository, // Use string token to match your use cases
+      useClass: CustomerRepository,
     },
   ],
   exports: [JwtStrategy, PassportModule],

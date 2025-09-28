@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeOrmAsyncConfig } from '../../config/typeorm.config';
 import { AuthModule } from './auth/auth.module';
 import { CustomerModule } from './customer/customer.module';
+import { VehicleModule } from './vehicle/vehicle.module';
 
 @Module({
   imports: [
@@ -12,7 +13,7 @@ import { CustomerModule } from './customer/customer.module';
     TypeOrmModule.forRootAsync(typeOrmAsyncConfig),
     CustomerModule,
     AuthModule,
-    // Tambahkan AuthModule, VehicleModule, TrackingModule di sini nanti
+    VehicleModule,
   ],
 })
 export class AppModule {}

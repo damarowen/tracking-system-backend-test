@@ -17,7 +17,10 @@ export class UserRepository implements IUserRepository {
   }
 
   async findByEmail(email: string): Promise<User | null> {
-    return this.typeormRepo.findOne({ where: { email } });
+    return this.typeormRepo.findOne({
+      where: { email },
+      relations: ['customer'],
+    });
   }
 
   async findById(id: string): Promise<User | null> {
