@@ -28,6 +28,7 @@ import {
   UpdateCustomerDto,
 } from '../../../../app/ports/input/customer.dto';
 import { JwtAuthGuard } from '../../../common/jwt/jwt-auth.guard';
+import { CacheService } from '../../../common/cache/cache.service';
 
 @ApiTags('Customers')
 @Controller('customers')
@@ -38,6 +39,7 @@ export class CustomerController {
     private readonly getCustomerByIdUseCase: GetCustomerByIdUseCase,
     private readonly updateCustomerUseCase: UpdateCustomerUseCase,
     private readonly deleteCustomerUseCase: DeleteCustomerUseCase,
+    private readonly cacheService: CacheService,
   ) {}
 
   @Post()
@@ -58,8 +60,16 @@ export class CustomerController {
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Get all customers' })
   @ApiResponse({ status: 200, description: 'List of customers' })
-  findAll() {
-    return this.getAllCustomersUseCase.execute();
+  async findAll() {
+    const cacheKey = 'customers:all';
+
+    let customers = await this.cacheService.get<any>(cacheKey);
+    if (!customers) {
+      customers = await this.getAllCustomersUseCase.execute();
+      await this.cacheService.set(cacheKey, customers, 600); // 10 minutes
+    }
+
+    return customers;
   }
 
   @Get(':id')
