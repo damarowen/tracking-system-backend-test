@@ -1,123 +1,255 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Real-Time Tracking System Backend
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+A robust backend system for real-time vehicle/asset tracking built with NestJS, following Domain-Driven Design (DDD) and Hexagonal Architecture principles.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## 🚀 Features
 
-## Description
+- **Clean Architecture**: Domain-Driven Design with Hexagonal Architecture
+- **Real-time Tracking**: WebSocket-based live location updates
+- **CRUD Operations**: Complete Customer and Vehicle management
+- **High Performance**: Optimized for high-frequency location updates
+- **Scalable Design**: Built for multiple concurrent connections
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## 🏗️ Architecture
 
-## Project setup
-
-```bash
-$ npm install
 ```
-
-## Compile and run the project
-
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Run tests
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ npm install -g mau
-$ mau deploy
-```
-
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
-
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
-
-```aiignore
 src/
 ├── app/                  # Application Layer (Use Cases)
-│   ├── use-cases/
-│   │   ├── auth/
-│   │   └── customer/
-│   └── ports/            # Interfaces (Ports)
-│       ├── input/        # DTOs
-│       └── output/       # Repository Interfaces
+│   ├── use-cases/        # Business logic orchestration
+│   └── ports/            # DTOs and interfaces
 ├── domain/               # Domain Layer (Business Logic)
-│   ├── models/           # Entitas, Value Objects
-│   ├── repositories/     # Abstraksi Repository (interface)
-│   └── services/         # Domain Services
+│   ├── models/           # Entities and Value Objects
+│   ├── repositories/     # Repository interfaces
+│   └── services/         # Domain services
 ├── infrastructure/       # Infrastructure Layer (Adapters)
 │   ├── adapters/
-│   │   ├── persistence/  # Implementasi Database (TypeORM/Prisma)
-│   │   │   └── postgres/
-│   │   ├── websocket/    # Gateways (Socket.IO)
-│   │   └── http/         # Controllers & Modules
-│   ├── config/           # Konfigurasi Database, Redis, dll.
-│   └── main.ts
-└── shared/               # Kode yang bisa dipakai di semua layer
+│   │   ├── persistence/  # Database implementations
+│   │   ├── http/         # REST Controllers
+│   │   └── websocket/    # WebSocket Gateway
+│   ├── config/           # Configuration
+│   └── main.ts          # Application entry point
 ```
+
+## 🛠️ Tech Stack
+
+- **Framework**: NestJS with TypeScript
+- **Database**: PostgreSQL with TypeORM
+- **WebSocket**: Socket.IO
+- **Validation**: class-validator, class-transformer
+- **Containerization**: Docker & Docker Compose
+- **Testing**: Jest
+
+## 📋 Prerequisites
+
+- Node.js 18+ or Docker
+- PostgreSQL 15+ (or use Docker)
+- Redis (optional, for scaling)
+
+## 🚀 Quick Start
+
+### Option 1: Docker (Recommended)
+
+```bash
+# Clone the repository
+git clone <repository-url>
+cd real-time-tracking-system
+
+# Start development environment
+npm run docker:dev
+
+# Or start production environment
+npm run docker:prod
+```
+
+### Option 2: Local Development
+
+```bash
+# Install dependencies
+npm install
+
+# Set up environment variables
+cp .env-example .env
+# Edit .env with your database credentials
+
+# Start PostgreSQL (if not using Docker)
+# Create database: live_tracking
+
+# Run migrations (auto with DB_SYNC=true)
+npm run start:dev
+```
+
+## 🌐 API Endpoints
+
+### Customer Management
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/customers` | Create customer |
+| GET | `/customers` | Get all customers |
+| GET | `/customers/:id` | Get customer by ID |
+| PATCH | `/customers/:id` | Update customer |
+| DELETE | `/customers/:id` | Delete customer |
+
+**Example Request:**
+```bash
+curl -X POST http://localhost:3000/customers \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "John Doe",
+    "email": "john@example.com"
+  }'
+```
+
+### Vehicle Management
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/vehicles` | Create vehicle |
+| GET | `/vehicles` | Get all vehicles |
+| GET | `/vehicles/:id` | Get vehicle by ID |
+| GET | `/vehicles/customer/:customerId` | Get vehicles by customer |
+| PATCH | `/vehicles/:id` | Update vehicle |
+| PATCH | `/vehicles/:id/location` | Update vehicle location |
+| DELETE | `/vehicles/:id` | Delete vehicle |
+
+**Example Request:**
+```bash
+curl -X POST http://localhost:3000/vehicles \
+  -H "Content-Type: application/json" \
+  -d '{
+    "plateNumber": "B1234XYZ",
+    "brand": "Toyota",
+    "model": "Avanza",
+    "year": 2022,
+    "type": "car",
+    "customerId": "uuid-here"
+  }'
+```
+
+### Tracking Status
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/tracking/status` | Get WebSocket connection stats |
+
+## 🔌 WebSocket API
+
+Connect to: `ws://localhost:3000/tracking`
+
+### Events
+
+#### Client → Server
+
+| Event | Data | Description |
+|-------|------|-------------|
+| `start_tracking` | `{ vehicleId: string }` | Start tracking vehicle |
+| `location_update` | `{ vehicleId, latitude, longitude, speed?, heading? }` | Send location update |
+| `stop_tracking` | `{ vehicleId: string }` | Stop tracking vehicle |
+| `subscribe_vehicle` | `{ vehicleId: string }` | Subscribe to vehicle updates |
+| `unsubscribe_vehicle` | `{ vehicleId: string }` | Unsubscribe from vehicle |
+| `get_active_vehicles` | `{}` | Get list of active vehicles |
+
+#### Server → Client
+
+| Event | Data | Description |
+|-------|------|-------------|
+| `connected` | `{ clientId, timestamp }` | Connection confirmed |
+| `tracking_started` | `{ vehicleId, timestamp }` | Tracking session started |
+| `location_updated` | `{ vehicleId, latitude, longitude, speed, timestamp }` | Location update broadcast |
+| `tracking_stopped` | `{ vehicleId, timestamp }` | Tracking session ended |
+| `subscribed` | `{ vehicleId, message }` | Subscription confirmed |
+| `active_vehicles` | `{ vehicles: [], count }` | Active vehicles list |
+| `error` | `{ message, code }` | Error occurred |
+
+### WebSocket Example
+
+```javascript
+const io = require('socket.io-client');
+const socket = io('http://localhost:3000/tracking');
+
+// Connect and subscribe
+socket.on('connect', () => {
+  socket.emit('subscribe_vehicle', { vehicleId: 'vehicle-uuid' });
+  socket.emit('start_tracking', { vehicleId: 'vehicle-uuid' });
+});
+
+// Handle location updates
+socket.on('location_updated', (data) => {
+  console.log('Vehicle moved:', data);
+});
+
+// Send location update
+socket.emit('location_update', {
+  vehicleId: 'vehicle-uuid',
+  latitude: -6.2088,
+  longitude: 106.8456,
+  speed: 30
+});
+```
+
+
+## 🧪 Testing
+
+```bash
+# Unit tests
+npm run test
+
+# E2E tests
+npm run test:e2e
+
+# Test coverage
+npm run test:cov
+
+# Test WebSocket connection
+node scripts/test-websocket.js
+```
+
+## 📈 Performance Considerations
+
+- **Database Indexing**: Indexes on frequently queried fields (email, plate_number)
+- **Real-time Optimization**: Efficient WebSocket room management
+- **Caching Strategy**: Ready for Redis integration
+
+## 🔒 Security Features
+
+- **Input Validation**: Comprehensive DTO validation
+- **Error Handling**: Secure error responses
+- **SQL Injection Prevention**: TypeORM query protection
+
+## 🏛️ Architecture Decisions
+
+### Why Clean Architecture?
+- **Testability**: Clear separation of concerns
+- **Maintainability**: Easy to modify and extend
+- **Independence**: Framework and database agnostic core
+- **Scalability**: Easy to add new features and adapters
+
+### Why WebSockets?
+- **Real-time Updates**: Sub-second location broadcasting
+- **Efficiency**: Persistent connections reduce overhead
+- **Scalability**: Room-based broadcasting to relevant clients
+- **Bidirectional**: Two-way communication support
+
+### Why TypeORM?
+- **Type Safety**: Full TypeScript integration
+- **Migrations**: Database schema management
+- **Relations**: Easy entity relationship handling
+- **Query Builder**: Complex query support
+
+## 📜 License
+
+This project is licensed under the MIT License.
+
+## 📞 Support
+
+For questions or support, please contact the development team.
+
+---
+**Demo Features:**
+- Customer CRUD operations
+- Vehicle CRUD operations
+- Real-time GPS tracking via WebSocket
+- Multi-client subscription support
+- Location history and tracking sessions
+- Performance monitoring and health checks
+- TO RUN DEMO with 10 user USE node scripts/simple-simulator.js
